@@ -53,7 +53,7 @@ if (navigator.mediaDevices.getUserMedia) {
     mediaRecorder.onstop = function(e) {
       console.log("data available after MediaRecorder.stop() called.");
 
-      const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+      const clipName = prompt('Chunks amount: ' + chunks.length + ' Enter a name for your sound clip?','My unnamed clip');
 
       const clipContainer = document.createElement('article');
       const clipLabel = document.createElement('p');
@@ -77,7 +77,7 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      const blob = new Blob(chunks);
+      const blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
       const audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
