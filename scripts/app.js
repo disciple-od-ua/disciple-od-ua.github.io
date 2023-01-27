@@ -24,7 +24,7 @@ if (navigator.mediaDevices.getUserMedia) {
   let chunks = [];
 
   let onSuccess = function(stream) {
-    const mediaRecorder = new MediaRecorder(stream);
+    const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp4'});
 
     visualize(stream);
 
@@ -77,10 +77,11 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      const blob = new Blob(chunks, { 'type' : 'audio/wav' });
+      const blob = new Blob(chunks, { 'type' : 'audio/mp4' });
       chunks = [];
       const audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
+      audio.type = 'audio/mp4'
       console.log("recorder stopped");
 
       deleteButton.onclick = function(e) {
